@@ -23,10 +23,6 @@ public class Account {
     @Column(name = "password")
     private String password;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "merchant_id")
-    private Merchant merchant;
-
     public Account() {
     }
 
@@ -68,13 +64,5 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Merchant getMerchant() {
-        return merchant;
-    }
-
-    public void setMerchant(Merchant merchant) {
-        this.merchant = merchant;
     }
 }

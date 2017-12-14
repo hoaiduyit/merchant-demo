@@ -48,16 +48,15 @@ public class AccountService {
     }
 
     @Transactional
-    public void createAccount(Account account) throws NoSuchAlgorithmException {
+    public void createAccount(Account account) {
         Account acc = accountRepository.findByEmail(account.getEmail());
         if (acc == null){
-            account = new Account();
-            account.setEmail(account.getEmail());
-            account.setPassword(MD5Util.Encrypt(account.getPassword()));
-            account.setType(account.getType());
-            account.setPhoneNumber(account.getPhoneNumber());
+            acc = new Account();
+            acc.setEmail(account.getEmail());
+            acc.setType(account.getType());
+            acc.setPhoneNumber(account.getPhoneNumber());
 
-            accountRepository.save(account);
+            accountRepository.save(acc);
         }
     }
 }

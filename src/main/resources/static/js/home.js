@@ -4,7 +4,6 @@ class App extends React.Component{
             <div>
                 <Sidebar/>
                 <AccountManagement />
-                <AddAccount />
             </div>
        );
     }

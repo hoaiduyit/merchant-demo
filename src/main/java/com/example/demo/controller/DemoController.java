@@ -36,9 +36,8 @@ public class DemoController {
         return ResponseEntity.ok(accountList);
     }
 
-    @PostMapping(value = "/home/create", consumes = "application/json;charset=UTF-8")
-    public String createAccount(@RequestBody Account account) throws NoSuchAlgorithmException {
+    @PostMapping(value = "/home/create")
+    public void createAccount(@RequestBody Account account) throws NoSuchAlgorithmException {
         service.createAccount(account);
-        return "home";
     }
 }
