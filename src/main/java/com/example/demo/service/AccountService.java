@@ -59,4 +59,16 @@ public class AccountService {
             accountRepository.save(acc);
         }
     }
+
+    @Transactional
+    public void updateAccount(Account account){
+        Account acc = accountRepository.findByEmail(account.getEmail());
+        if (acc != null){
+            acc.setEmail(account.getEmail());
+            acc.setType(account.getType());
+            acc.setPhoneNumber(account.getPhoneNumber());
+
+            accountRepository.save(acc);
+        }
+    }
 }

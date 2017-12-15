@@ -35,6 +35,23 @@ class AccountManagement extends React.Component {
         save();
     }
 
+    onAfterSaveCell = (row, cellName, cellValue) => {
+        fetch('/home/update', {
+            credentials: 'same-origin',
+            method: 'POST',
+            body: JSON.stringify({
+                "email": row.email,
+                "type": row.type,
+                "phoneNumber": row.phoneNumber
+            }),
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8'
+            }
+        }).then(res => {
+            return res.json();
+        });
+    };
+
     createCustomModalFooter = (closeModal, save) => {
         return (
             <InsertModalFooter
@@ -62,7 +79,7 @@ class AccountManagement extends React.Component {
             }, {
                 text: '10', value: 10
             }, {
-                text: 'All', value: this.state.account.length
+                text: 'All',
             }],
             sizePerPage: 5,  // which size per page you want to locate as default
             pageStartIndex: 1, // where to start counting the pages
@@ -75,10 +92,16 @@ class AccountManagement extends React.Component {
             insertModalBody: this.createCustomModalBody
         };
 
+        let cellEditProp = {
+            mode: 'click',
+            blueToSave: true,
+            afterSaveCell: this.onAfterSaveCell
+        };
+
         return (
             <div>
                 <div style={{"width": "70%", "float": "right", "marginRight": "50px"}}>
-                    <BootstrapTable options={options} data={this.state.account[0]} search pagination insertRow>
+                    <BootstrapTable options={options} cellEdit={cellEditProp} data={this.state.account[0]} search pagination insertRow>
                         <TableHeaderColumn dataField='email' isKey={true} dataSort>Email</TableHeaderColumn>
                         <TableHeaderColumn dataField='phoneNumber' dataSort>Phone Number</TableHeaderColumn>
                         <TableHeaderColumn dataField='type' dataSort>Type</TableHeaderColumn>

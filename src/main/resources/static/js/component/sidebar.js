@@ -1,5 +1,5 @@
-var Sidebar = React.createClass({
-   render: function () {
+class Sidebar extends React.Component{
+   render() {
        return(
            <div className="sidebar-left">
                <div className="sidebar-container">
@@ -36,4 +36,4 @@ var Sidebar = React.createClass({
            </div>
        );
    } 
-});
+};

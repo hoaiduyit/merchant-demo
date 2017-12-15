@@ -40,4 +40,9 @@ public class DemoController {
     public void createAccount(@RequestBody Account account) throws NoSuchAlgorithmException {
         service.createAccount(account);
     }
+
+    @PostMapping(value = "/home/update")
+    public void updateAccount(@RequestBody Account account) {
+        service.updateAccount(account);
+    }
 }
