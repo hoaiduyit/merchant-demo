@@ -52,6 +52,18 @@ class AccountManagement extends React.Component {
         });
     };
 
+    onAfterDelete = (rowKeys) => {
+        fetch('/home/delete/'+rowKeys, {
+            credentials: 'same-origin',
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8'
+            }
+        }).then(res => {
+            return res.json();
+        })
+    };
+
     createCustomModalFooter = (closeModal, save) => {
         return (
             <InsertModalFooter
@@ -89,7 +101,8 @@ class AccountManagement extends React.Component {
             firstPage: 'First', // First page button text
             lastPage: 'Last', // Last page button text,
             insertModalFooter: this.createCustomModalFooter,
-            insertModalBody: this.createCustomModalBody
+            insertModalBody: this.createCustomModalBody,
+            afterDeleteRow: this.onAfterDelete
         };
 
         let cellEditProp = {
@@ -98,10 +111,14 @@ class AccountManagement extends React.Component {
             afterSaveCell: this.onAfterSaveCell
         };
 
+        let selectRowProp = {
+            mode: 'checkbox'
+        };
+
         return (
             <div>
                 <div style={{"width": "70%", "float": "right", "marginRight": "50px"}}>
-                    <BootstrapTable options={options} cellEdit={cellEditProp} data={this.state.account[0]} search pagination insertRow>
+                    <BootstrapTable options={options} cellEdit={cellEditProp} selectRow={selectRowProp} data={this.state.account[0]} search pagination insertRow deleteRow>
                         <TableHeaderColumn dataField='email' isKey={true} dataSort>Email</TableHeaderColumn>
                         <TableHeaderColumn dataField='phoneNumber' dataSort>Phone Number</TableHeaderColumn>
                         <TableHeaderColumn dataField='type' dataSort>Type</TableHeaderColumn>

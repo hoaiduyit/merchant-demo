@@ -71,4 +71,12 @@ public class AccountService {
             accountRepository.save(acc);
         }
     }
+
+    @Transactional
+    public void deleteAccount(String email){
+        Account acc = accountRepository.findByEmail(email);
+        if (acc != null){
+            accountRepository.delete(acc);
+        }
+    }
 }

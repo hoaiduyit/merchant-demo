@@ -45,4 +45,9 @@ public class DemoController {
     public void updateAccount(@RequestBody Account account) {
         service.updateAccount(account);
     }
+
+    @DeleteMapping (value = "/home/delete/{email}")
+    public void deleteAccount(@PathVariable String email){
+        service.deleteAccount(email);
+    }
 }
